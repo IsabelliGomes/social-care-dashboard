@@ -1,4 +1,4 @@
-import { getChildByIdService, listChildrenService } from "../services/children.service";
+import { getChildByIdService, listChildrenService, reviewChildService } from "../services/children.service";
 import * as store from "../data/children.store";
 import type { Child } from "../data/children.store";
 
@@ -24,6 +24,9 @@ const mockGetChildren = store.getChildren as jest.MockedFunction<
 >;
 const mockGetChildById = store.getChildById as jest.MockedFunction<
   typeof store.getChildById
+>;
+const mockUpdateChildReview = store.updateChildReview as jest.MockedFunction<
+  typeof store.updateChildReview
 >;
 
 describe("children service", () => {
@@ -162,4 +165,69 @@ describe("children service", () => {
       expect(result).toBeUndefined();
     });
   });
+
+  describe("children review service", () => {
+    test("marks a child as reviewed and returns updated record", async () => {
+      const childId = "c001";
+      const reviewedBy = "tecnico@prefeitura.rio";
+      const currentTime = new Date().toISOString();
+  
+      mockUpdateChildReview.mockResolvedValue(
+        mockedChild({
+          id: childId,
+          revisado: true,
+          revisado_por: reviewedBy,
+          revisado_em: currentTime,
+        })
+      );
+  
+      const result = await reviewChildService(childId, reviewedBy);
+  
+      expect(result).toBeDefined();
+      expect(result?.id).toBe(childId);
+      expect(result?.revisado).toBe(true);
+      expect(result?.revisado_por).toBe(reviewedBy);
+      expect(mockUpdateChildReview).toHaveBeenCalledWith(childId, reviewedBy);
+    });
+  
+    test("returns undefined when child does not exist", async () => {
+      const nonExistingChildId = "c999";
+      const reviewedBy = "tecnico@prefeitura.rio";
+  
+      mockUpdateChildReview.mockResolvedValue(undefined);
+  
+      const result = await reviewChildService(nonExistingChildId, reviewedBy);
+  
+      expect(result).toBeUndefined();
+    });
+  
+    test("can review multiple different children", async () => {
+      const reviewedBy = "tecnico@prefeitura.rio";
+  
+      mockUpdateChildReview.mockResolvedValue(
+        mockedChild({
+          id: "c001",
+          revisado: true,
+          revisado_por: reviewedBy,
+        })
+      );
+  
+      const result1 = await reviewChildService("c001", reviewedBy);
+  
+      mockUpdateChildReview.mockResolvedValue(
+        mockedChild({
+          id: "c002",
+          revisado: true,
+          revisado_por: reviewedBy,
+        })
+      );
+  
+      const result2 = await reviewChildService("c002", reviewedBy);
+  
+      expect(result1?.id).toBe("c001");
+      expect(result2?.id).toBe("c002");
+      expect(result1?.revisado).toBe(true);
+      expect(result2?.revisado).toBe(true);
+    });
+  });  
 });
