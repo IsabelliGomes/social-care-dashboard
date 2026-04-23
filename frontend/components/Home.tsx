@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Button } from "./Button";
+import { routes } from "@/lib/routes";
 import styles from "./Home.module.scss";
 
 export const Home = () => {
@@ -23,7 +24,7 @@ export const Home = () => {
 
         <Button
           type="button"
-          onClick={() => router.push("/login")}
+          onClick={() => router.push(routes.login)}
           className={styles.home__button}
         >
           Entrar
