@@ -1,7 +1,8 @@
 import type { Request, Response } from "express";
+import { getSummaryService } from "../services/summary.service";
 
 export const getSummary = (_req: Request, res: Response): void => {
-  res.status(501).json({
-    message: "GET /summary not implemented yet",
-  });
+  const summary = getSummaryService();
+
+  res.status(200).json(summary);
 };
