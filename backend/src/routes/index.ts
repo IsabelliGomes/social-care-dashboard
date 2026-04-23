@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { authRouter } from "./auth.routes";
-import { childrenRouter } from "./children.routes";
-import { summaryRouter } from "./summary.routes";
+import { authRouter } from "./authRoutes";
+import { childrenRouter } from "./childrenRoutes";
+import { summaryRouter } from "./summaryRoutes";
 
 export const apiRouter = Router();
 
