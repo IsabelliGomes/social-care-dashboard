@@ -1,5 +1,8 @@
 import type { Request, Response } from "express";
-import { listChildrenService } from "../services/children.service";
+import {
+  getChildByIdService,
+  listChildrenService,
+} from "../services/children.service";
 import { parseBoolean } from "../utils/parse-boolean";
 
 export const listChildren = (req: Request, res: Response): void => {
@@ -28,10 +31,18 @@ export const listChildren = (req: Request, res: Response): void => {
   });
 };
 
-export const getChildById = (_req: Request, res: Response): void => {
-  res.status(501).json({
-    message: "GET /children/:id not implemented yet",
-  });
+export const getChildById = (req: Request, res: Response): void => {
+  const { id } = req.params;
+  const child = getChildByIdService(id);
+
+  if (!child) {
+    res.status(404).json({
+      message: "Child not found",
+    });
+    return;
+  }
+
+  res.status(200).json(child);
 };
 
 export const reviewChild = (_req: Request, res: Response): void => {

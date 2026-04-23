@@ -49,3 +49,7 @@ export const listChildrenService = (filters: ListChildrenFilters) => {
     },
   };
 };
+
+export const getChildByIdService = (id: string): Child | undefined => {
+  return getChildren().find((child) => child.id === id);
+};
