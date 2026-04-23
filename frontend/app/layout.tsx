@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "tailwindcss";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Social Care Dashboard",
