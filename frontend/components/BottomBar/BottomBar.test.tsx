@@ -9,6 +9,10 @@ jest.mock("next/navigation", () => ({
   usePathname: () => mockPathname(),
 }));
 
+jest.mock("@/lib/api", () => ({
+  clearToken: jest.fn(() => localStorage.removeItem("auth_token")),
+}));
+
 describe("BottomBar", () => {
   beforeEach(() => {
     mockPush.mockClear();
@@ -40,12 +44,12 @@ describe("BottomBar", () => {
   });
 
   test("clears token and redirects to home on logout", () => {
-    localStorage.setItem("token", "some-token");
+    localStorage.setItem("auth_token", "some-token");
     render(<BottomBar />);
 
     fireEvent.click(screen.getByRole("button", { name: /sair/i }));
 
-    expect(localStorage.getItem("token")).toBeNull();
+    expect(localStorage.getItem("auth_token")).toBeNull();
     expect(mockPush).toHaveBeenCalledWith("/");
   });
 });

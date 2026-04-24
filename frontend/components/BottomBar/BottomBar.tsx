@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, Users, LogOut } from "lucide-react";
+import { clearToken } from "@/lib/api";
 import { routes } from "@/lib/routes";
 import styles from "./BottomBar.module.scss";
 
@@ -16,7 +17,7 @@ export function BottomBar() {
   const router = useRouter();
 
   function handleLogout() {
-    localStorage.removeItem("token");
+    clearToken();
     router.push(routes.home);
   }
 

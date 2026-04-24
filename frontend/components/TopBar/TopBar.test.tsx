@@ -35,7 +35,7 @@ describe("TopBar", () => {
 
   test("extracts and displays the username from a stored JWT", () => {
     localStorage.setItem(
-      "token",
+      "auth_token",
       buildToken({ email: "tecnico@prefeitura.rio" })
     );
 

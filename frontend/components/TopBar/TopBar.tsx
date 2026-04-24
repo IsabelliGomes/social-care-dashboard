@@ -14,7 +14,7 @@ function getGreeting(): string {
 function getUserEmail(): string | null {
   if (typeof window === "undefined") return null;
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("auth_token");
     if (!token) return null;
     const payload = JSON.parse(atob(token.split(".")[1]));
     return payload.email ?? null;

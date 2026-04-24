@@ -34,6 +34,16 @@ export const apiCall = async (
   });
 };
 
+export const getSummary = async (): Promise<import("@/types").SummaryResponse> => {
+  const response = await apiCall("/summary");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch summary");
+  }
+
+  return response.json();
+};
+
 export const login = async (
   email: string,
   password: string

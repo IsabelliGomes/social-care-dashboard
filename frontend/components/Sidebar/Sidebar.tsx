@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, Users, LogOut } from "lucide-react";
+import { clearToken } from "@/lib/api";
 import { routes } from "@/lib/routes";
 import styles from "./Sidebar.module.scss";
 
@@ -17,7 +18,7 @@ export function Sidebar() {
   const router = useRouter();
 
   function handleLogout() {
-    localStorage.removeItem("token");
+    clearToken();
     router.push(routes.home);
   }
 
