@@ -44,6 +44,18 @@ export const getSummary = async (): Promise<import("@/types").SummaryResponse> =
   return response.json();
 };
 
+export const getChildren = async (
+  pageSize = 500
+): Promise<import("@/types").ListChildrenResponse> => {
+  const response = await apiCall(`/children?page=1&pageSize=${pageSize}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch children");
+  }
+
+  return response.json();
+};
+
 export const login = async (
   email: string,
   password: string
