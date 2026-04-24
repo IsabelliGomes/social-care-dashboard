@@ -6,10 +6,10 @@ describe("CtaBanner", () => {
     render(<CtaBanner />);
 
     expect(
-      screen.getByText("Casos pendentes de revisão")
+      screen.getByText(/Acompanhe e faça a diferença/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Acesse a lista completa de crianças/)
+      screen.getByText(/Acesse a lista completa de crianças/i)
     ).toBeInTheDocument();
   });
 

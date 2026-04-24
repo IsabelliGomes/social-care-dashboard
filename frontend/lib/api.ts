@@ -45,9 +45,20 @@ export const getSummary = async (): Promise<import("@/types").SummaryResponse> =
 };
 
 export const getChildren = async (
-  pageSize = 500
+  page = 1,
+  pageSize = 5,
+  filters: { bairro?: string; comAlertas?: string; revisado?: string } = {}
 ): Promise<import("@/types").ListChildrenResponse> => {
-  const response = await apiCall(`/children?page=1&pageSize=${pageSize}`);
+  const params = new URLSearchParams({
+    page: String(page),
+    pageSize: String(pageSize),
+  });
+
+  if (filters.bairro) params.set("bairro", filters.bairro);
+  if (filters.comAlertas) params.set("comAlertas", filters.comAlertas);
+  if (filters.revisado) params.set("revisado", filters.revisado);
+
+  const response = await apiCall(`/children?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch children");
