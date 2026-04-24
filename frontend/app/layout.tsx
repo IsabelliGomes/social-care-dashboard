@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Social Care Dashboard",
-  description: "Sistema de acompanhamento de crianças em situação de vulnerabilidade",
+  title: "Cuidado Social",
+  description: "Painel de Acompanhamento de Crianças",
 };
 
 export default function RootLayout({
