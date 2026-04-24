@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { TopBar } from "@/components/TopBar/TopBar";
 import { SummarySection } from "@/components/SummarySection/SummarySection";
 import { ChartsSection } from "@/components/ChartsSection/ChartsSection";
+import { CtaBanner } from "@/components/CtaBanner/CtaBanner";
 import { getSummary } from "@/lib/api";
 import type { SummaryResponse } from "@/types";
 import styles from "./page.module.scss";
@@ -32,6 +33,7 @@ export default function DashboardPage() {
 
         <SummarySection summary={summary} loading={loading} />
         <ChartsSection summary={summary} loading={loading} />
+        <CtaBanner />
       </main>
     </>
   );
