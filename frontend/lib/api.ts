@@ -67,6 +67,32 @@ export const getChildren = async (
   return response.json();
 };
 
+export const getChildById = async (
+  id: string
+): Promise<import("@/types").Child> => {
+  const response = await apiCall(`/children/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Child not found");
+  }
+
+  return response.json();
+};
+
+export const reviewChild = async (
+  id: string
+): Promise<import("@/types").Child> => {
+  const response = await apiCall(`/children/${id}/review`, {
+    method: "PATCH",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to review child");
+  }
+
+  return response.json();
+};
+
 export const login = async (
   email: string,
   password: string

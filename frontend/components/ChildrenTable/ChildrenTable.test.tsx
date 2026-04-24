@@ -38,6 +38,6 @@ describe("ChildrenTable", () => {
     expect(screen.getByText("saude")).toBeInTheDocument();
     expect(screen.getByText("educacao")).toBeInTheDocument();
     expect(screen.getByText("pendente")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /ver detalhes de maria silva/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /ver detalhes de maria silva/i })).toBeInTheDocument();
   });
 });

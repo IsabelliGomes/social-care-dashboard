@@ -8,9 +8,21 @@ export type Child = {
   data_nascimento: string;
   bairro: string;
   responsavel: string;
-  saude: { alertas?: string[] } | null;
-  educacao: { alertas?: string[] } | null;
-  assistencia_social: { alertas?: string[] } | null;
+  saude: {
+    ultima_consulta?: string;
+    vacinas_em_dia?: boolean;
+    alertas?: string[];
+  } | null;
+  educacao: {
+    escola?: string;
+    frequencia_percent?: number;
+    alertas?: string[];
+  } | null;
+  assistencia_social: {
+    cad_unico?: boolean;
+    beneficio_ativo?: boolean;
+    alertas?: string[];
+  } | null;
   revisado: boolean;
   revisado_por: string | null;
   revisado_em: string | null;

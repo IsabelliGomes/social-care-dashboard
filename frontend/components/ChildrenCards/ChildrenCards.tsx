@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { AlertBadge } from "@/components/AlertBadge/AlertBadge";
 import { StatusBadge } from "@/components/StatusBadge/StatusBadge";
+import { routes } from "@/lib/routes";
 import type { Child } from "@/types";
 import styles from "./ChildrenCards.module.scss";
 
@@ -26,7 +28,8 @@ export function ChildrenCards({ children }: ChildrenCardsProps) {
       {children.map((child) => {
         const areas = getAlertAreas(child);
         return (
-          <li key={child.id} className={styles.card}>
+          <li key={child.id}>
+          <Link href={routes.childDetail(child.id)} className={styles.card}>
             <div className={styles.header}>
               <div className={styles.avatar} aria-hidden="true">
                 {child.nome.charAt(0)}
@@ -46,6 +49,7 @@ export function ChildrenCards({ children }: ChildrenCardsProps) {
               </div>
               <StatusBadge revisado={child.revisado} />
             </div>
+          </Link>
           </li>
         );
       })}

@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { AlertBadge } from "@/components/AlertBadge/AlertBadge";
 import { StatusBadge } from "@/components/StatusBadge/StatusBadge";
+import { routes } from "@/lib/routes";
 import type { Child } from "@/types";
 import styles from "./ChildrenTable.module.scss";
 
@@ -65,10 +67,14 @@ export function ChildrenTable({ children }: ChildrenTableProps) {
                   <StatusBadge revisado={child.revisado} />
                 </td>
                 <td className={styles.td}>
-                  <button className={styles.detailsButton} aria-label={`Ver detalhes de ${child.nome}`}>
+                  <Link
+                    href={routes.childDetail(child.id)}
+                    className={styles.detailsButton}
+                    aria-label={`Ver detalhes de ${child.nome}`}
+                  >
                     Ver detalhes
                     <ChevronRight size={14} aria-hidden="true" />
-                  </button>
+                  </Link>
                 </td>
               </tr>
             );
