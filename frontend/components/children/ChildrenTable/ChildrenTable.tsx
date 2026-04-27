@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertBadge } from "@/components/ui";
-import { ConfirmationReviewDialog } from "./ConfirmationReviewDialog/ConfirmationReviewDialog";
+import { ConfirmationReviewDialog } from "../ConfirmationReviewDialog/ConfirmationReviewDialog";
 import { routes } from "@/lib/routes";
 import type { Child } from "@/types";
 import styles from "./ChildrenTable.module.scss";

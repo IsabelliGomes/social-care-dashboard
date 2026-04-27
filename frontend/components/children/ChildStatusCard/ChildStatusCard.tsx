@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StatusBadge } from "@/components/ui";
-import { ConfirmationReviewDialog } from "./ConfirmationReviewDialog/ConfirmationReviewDialog";
+import { ConfirmationReviewDialog } from "../ConfirmationReviewDialog/ConfirmationReviewDialog";
 import type { Child } from "@/types";
 import styles from "./ChildStatusCard.module.scss";
 
