@@ -52,7 +52,7 @@ export function AlertsByAreaChart() {
   const [selectedBairro, setSelectedBairro] = useState<string>("Todos");
 
   useEffect(() => {
-    getChildren()
+    getChildren(1, 1000)
       .then((res) => setChildren(res.items))
       .finally(() => setLoading(false));
   }, []);

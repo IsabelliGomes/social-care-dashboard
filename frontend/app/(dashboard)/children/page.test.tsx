@@ -4,6 +4,7 @@ import ChildrenPage from "@/app/(dashboard)/children/page";
 
 jest.mock("@/lib/api", () => ({
   getChildren: jest.fn(),
+  reviewChild: jest.fn(),
 }));
 
 jest.mock("@/components/TopBar/TopBar", () => ({
@@ -15,8 +16,8 @@ jest.mock("@/components/ChildFilters/ChildFilters", () => ({
 }));
 
 jest.mock("@/components/ChildrenTable/ChildrenTable", () => ({
-  ChildrenTable: ({ children }: { children: unknown[] }) => (
-    <div data-testid="table">{children.length}</div>
+  ChildrenTable: ({ children, onReview, reviewingId }: { children: unknown[]; onReview: jest.Mock; reviewingId: string | null }) => (
+    <div data-testid="table" onClick={() => onReview("1")}>{children.length}</div>
   ),
 }));
 

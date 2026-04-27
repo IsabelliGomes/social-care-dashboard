@@ -6,7 +6,7 @@ import { ChildFilters, type Filters } from "@/components/ChildFilters/ChildFilte
 import { ChildrenTable } from "@/components/ChildrenTable/ChildrenTable";
 import { ChildrenCards } from "@/components/ChildrenCards/ChildrenCards";
 import { Pagination } from "@/components/Pagination/Pagination";
-import { getChildren } from "@/lib/api";
+import { getChildren, reviewChild } from "@/lib/api";
 import type { Child, ListChildrenResponse } from "@/types";
 import styles from "./page.module.scss";
 
@@ -19,6 +19,7 @@ export default function ChildrenPage() {
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [reviewingId, setReviewingId] = useState<string | null>(null);
 
   const fetchChildren = useCallback(async (p: number, f: Filters) => {
     setLoading(true);
@@ -49,6 +50,27 @@ export default function ChildrenPage() {
   function handleClear() {
     setFilters(EMPTY_FILTERS);
     setPage(1);
+  }
+
+  async function handleReview(childId: string) {
+    setReviewingId(childId);
+    try {
+      await reviewChild(childId);
+      if (data) {
+        setData({
+          ...data,
+          items: data.items.map((child) =>
+            child.id === childId
+              ? { ...child, revisado: true, revisado_em: new Date().toISOString() }
+              : child
+          ),
+        });
+      }
+    } catch {
+      // error handled silently or could show toast notification
+    } finally {
+      setReviewingId(null);
+    }
   }
 
   const bairros = useMemo<string[]>(() => {
@@ -87,7 +109,7 @@ export default function ChildrenPage() {
           <div className={styles.skeleton} aria-busy="true" />
         ) : (
           <>
-            <ChildrenTable children={items} />
+            <ChildrenTable children={items} onReview={handleReview} reviewingId={reviewingId} />
             <ChildrenCards children={items} />
           </>
         )}

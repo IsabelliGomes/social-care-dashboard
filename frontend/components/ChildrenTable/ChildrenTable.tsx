@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { AlertBadge } from "@/components/AlertBadge/AlertBadge";
-import { StatusBadge } from "@/components/StatusBadge/StatusBadge";
 import { routes } from "@/lib/routes";
 import type { Child } from "@/types";
 import styles from "./ChildrenTable.module.scss";
@@ -20,9 +19,21 @@ function getAlertAreas(child: Child) {
 
 type ChildrenTableProps = {
   children: Child[];
+  onReview: (id: string) => void;
+  reviewingId: string | null;
 };
 
-export function ChildrenTable({ children }: ChildrenTableProps) {
+export function ChildrenTable({ children, onReview, reviewingId }: ChildrenTableProps) {
+  const router = useRouter();
+
+  function handleRowClick(childId: string, e: React.MouseEvent) {
+    // Don't navigate if clicking the button
+    if ((e.target as HTMLElement).closest("button")) {
+      return;
+    }
+    router.push(routes.childDetail(childId));
+  }
+
   return (
     <div className={styles.wrapper}>
       <table className={styles.table}>
@@ -31,15 +42,24 @@ export function ChildrenTable({ children }: ChildrenTableProps) {
             <th className={styles.th}>Nome</th>
             <th className={styles.th}>Bairro</th>
             <th className={styles.th}>Alertas</th>
-            <th className={styles.th}>Status</th>
-            <th className={styles.th}>Ação</th>
+            <th className={styles.th}>Revisar</th>
           </tr>
         </thead>
         <tbody>
           {children.map((child) => {
             const areas = getAlertAreas(child);
+            const isReviewing = reviewingId === child.id;
             return (
-              <tr key={child.id} className={styles.row}>
+              <tr
+                key={child.id}
+                className={styles.row}
+                onClick={(e) => handleRowClick(child.id, e)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleRowClick(child.id, e as any);
+                }}
+                role="button"
+                tabIndex={0}
+              >
                 <td className={styles.td}>
                   <div className={styles.nameCell}>
                     <div className={styles.avatar} aria-hidden="true">
@@ -63,18 +83,27 @@ export function ChildrenTable({ children }: ChildrenTableProps) {
                       : <span className={styles.noAlerts}>—</span>}
                   </div>
                 </td>
-                <td className={styles.td}>
-                  <StatusBadge revisado={child.revisado} />
-                </td>
-                <td className={styles.td}>
-                  <Link
-                    href={routes.childDetail(child.id)}
-                    className={styles.detailsButton}
-                    aria-label={`Ver detalhes de ${child.nome}`}
+                <td className={styles.td} onClick={(e) => e.stopPropagation()}>
+                  <button
+                    className={`${styles.reviewButton} ${child.revisado ? styles.reviewed : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onReview(child.id);
+                    }}
+                    disabled={child.revisado || isReviewing}
+                    aria-label={`${child.revisado ? "Já revisado" : "Revisar"} ${child.nome}`}
                   >
-                    Ver detalhes
-                    <ChevronRight size={14} aria-hidden="true" />
-                  </Link>
+                    {child.revisado ? (
+                      <>
+                        <Check size={14} aria-hidden="true" />
+                        Revisado
+                      </>
+                    ) : isReviewing ? (
+                      "Salvando..."
+                    ) : (
+                      "Revisar"
+                    )}
+                  </button>
                 </td>
               </tr>
             );
