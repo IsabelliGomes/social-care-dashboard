@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { verifyToken } from "../services/auth.service";
+import { verifyToken } from "../services/auth/auth.service";
 
 export interface AuthRequest extends Request {
   user?: { preferred_username: string };

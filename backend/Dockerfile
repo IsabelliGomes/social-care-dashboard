@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["node", "--import", "tsx/esm", "src/server.ts"]
+CMD ["node_modules/.bin/tsx", "src/server.ts"]
