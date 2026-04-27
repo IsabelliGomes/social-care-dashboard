@@ -125,6 +125,7 @@ export function AlertsByAreaChart() {
               iconSize={8}
               wrapperStyle={{ fontSize: "0.8125rem" }}
             />
+
             <Bar dataKey="Saúde" fill={AREA_COLORS.saude} radius={[3, 3, 0, 0]} />
             <Bar dataKey="Educação" fill={AREA_COLORS.educacao} radius={[3, 3, 0, 0]} />
             <Bar dataKey="Assistência" fill={AREA_COLORS.assistenciaSocial} radius={[3, 3, 0, 0]} />

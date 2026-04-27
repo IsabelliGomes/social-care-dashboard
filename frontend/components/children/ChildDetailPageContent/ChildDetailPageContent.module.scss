@@ -2,6 +2,7 @@
   @apply flex flex-col gap-6 mx-auto;
   padding: 1.5rem 1rem;
   max-width: 64rem;
+  margin: 0;
 
   @media (min-width: 768px) {
     padding: 2rem 1.5rem;

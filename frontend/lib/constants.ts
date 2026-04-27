@@ -1,10 +1,5 @@
 export const AREA_COLORS = {
-  saude: "var(--color-alert)",
-  educacao: "var(--color-attention)",
-  assistenciaSocial: "var(--color-info)",
-} as const;
-
-export const REVIEW_COLORS = {
-  revisados: "var(--color-success)",
-  pendentes: "var(--color-neutral)",
+  saude: "#ef4444",
+  educacao: "#f8b11a",
+  assistenciaSocial: "#18b7b1",
 } as const;

@@ -4,13 +4,13 @@
 }
 
 .saude {
-  @apply bg-health-bg text-alert;
+  @apply bg-health-bg text-health;
 }
 
 .educacao {
-  @apply bg-amber-100 text-amber-600;
+  @apply bg-education-bg text-education;
 }
 
 .assistenciaSocial {
-  @apply bg-blue-100 text-blue-600;
+  @apply bg-assistance-bg text-assistance;
 }

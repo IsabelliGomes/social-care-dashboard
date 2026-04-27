@@ -41,14 +41,14 @@
 
 /* Accent border-left color variants */
 .accent-primary   { @apply border-l-primary-600; }
-.accent-alert     { @apply border-l-alert; }
-.accent-attention { @apply border-l-attention; }
-.accent-info      { @apply border-l-info; }
+.accent-alert     { @apply border-l-health; }
+.accent-attention { @apply border-l-education; }
+.accent-info      { @apply border-l-assistance; }
 .accent-success   { @apply border-l-success; }
 
 /* Icon wrapper background + color variants */
 .icon-primary   { @apply bg-primary-100 text-primary-600; }
-.icon-alert     { @apply bg-health-bg text-alert; }
-.icon-attention { @apply bg-education-bg text-attention; }
-.icon-info      { @apply bg-brand-100 text-info; }
+.icon-alert    { @apply bg-health-bg text-health; }
+.icon-attention { @apply bg-education-bg text-education; }
+.icon-info      { @apply bg-assistance-bg text-assistance; }
 .icon-success   { @apply bg-green-100 text-success; }

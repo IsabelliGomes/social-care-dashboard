@@ -1,7 +1,6 @@
 "use client";
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-import { REVIEW_COLORS } from "@/lib/constants";
 import type { SummaryResponse } from "@/types";
 import styles from "./ReviewStatusChart.module.scss";
 
@@ -19,8 +18,8 @@ export function ReviewStatusChart({ summary, loading }: ReviewStatusChartProps) 
   const pendingPercentage = total > 0 ? 100 - reviewedPercentage : 0;
 
   const data = [
-    { name: "Revisados", value: reviewed, color: REVIEW_COLORS.revisados },
-    { name: "Pendentes", value: pending, color: REVIEW_COLORS.pendentes },
+    { name: "Revisados", value: reviewed, color: "success" },
+    { name: "Pendentes", value: pending, color: "pending" },
   ];
 
   return (
@@ -46,7 +45,7 @@ export function ReviewStatusChart({ summary, loading }: ReviewStatusChartProps) 
                   strokeWidth={0}
                 >
                   {data.map((entry, index) => (
-                    <Cell key={index} fill={entry.color} />
+                    <Cell key={index} className={`${styles.cell} ${styles[`cell-${entry.color}`]}`} />
                   ))}
                 </Pie>
               </PieChart>
@@ -61,8 +60,7 @@ export function ReviewStatusChart({ summary, loading }: ReviewStatusChartProps) 
           <ul className={styles.legend}>
             <li className={styles.legendItem}>
               <span
-                className={styles.legendDot}
-                style={{ backgroundColor: REVIEW_COLORS.revisados }}
+                className={`${styles.legendDot} ${styles["legendDot-success"]}`}
               />
               <div>
                 <p className={styles.legendName}>Revisados</p>
@@ -74,8 +72,7 @@ export function ReviewStatusChart({ summary, loading }: ReviewStatusChartProps) 
             </li>
             <li className={styles.legendItem}>
               <span
-                className={styles.legendDot}
-                style={{ backgroundColor: REVIEW_COLORS.pendentes }}
+                className={`${styles.legendDot} ${styles["legendDot-pending"]}`}
               />
               <div>
                 <p className={styles.legendName}>Pendentes</p>

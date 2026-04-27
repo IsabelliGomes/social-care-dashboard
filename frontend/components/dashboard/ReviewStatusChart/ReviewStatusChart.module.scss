@@ -66,6 +66,14 @@
   @apply rounded-full flex-shrink-0 mt-1;
   width: 0.625rem;
   height: 0.625rem;
+
+  &-success {
+    @apply bg-success;
+  }
+
+  &-pending {
+    @apply bg-neutral;
+  }
 }
 
 .legendName {
@@ -79,4 +87,16 @@
 
 .legendPercentage {
   @apply font-normal text-secondary;
+}
+
+.cell {
+  @apply fill-current;
+}
+
+.cell-success {
+  @apply fill-success;
+}
+
+.cell-pending {
+  @apply fill-neutral;
 }

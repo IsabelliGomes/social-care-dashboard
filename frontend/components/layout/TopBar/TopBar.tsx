@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Bell } from "lucide-react";
 import styles from "./TopBar.module.scss";
 
 function getGreeting(): string {
@@ -42,15 +41,6 @@ export function TopBar() {
         <p className={styles.greetingSubtitle}>
           Painel de Acompanhamento de Crianças
         </p>
-      </div>
-
-      <div className={styles.actions}>
-        <button
-          className={styles.notificationButton}
-          aria-label="Notificações"
-        >
-          <Bell size={20} aria-hidden="true" />
-        </button>
       </div>
     </header>
   );

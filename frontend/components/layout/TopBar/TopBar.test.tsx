@@ -22,11 +22,6 @@ describe("TopBar", () => {
     expect(screen.getByText("Painel de Acompanhamento de Crianças")).toBeInTheDocument();
   });
 
-  test("renders notification button", () => {
-    render(<TopBar />);
-    expect(screen.getByRole("button", { name: /Notificações/ })).toBeInTheDocument();
-  });
-
   test("shows default name when no token", () => {
     render(<TopBar />);
     expect(screen.getByText("técnico")).toBeInTheDocument();
