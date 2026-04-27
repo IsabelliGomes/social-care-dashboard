@@ -6,6 +6,17 @@ jest.mock("@/components/AlertBadge/AlertBadge", () => ({
   AlertBadge: ({ area }: { area: string }) => <span>{area}</span>,
 }));
 
+jest.mock("@/components/ConfirmationReviewDialog/ConfirmationReviewDialog", () => ({
+  ConfirmationReviewDialog: ({ isOpen, onConfirm, onCancel }: any) => (
+    isOpen ? (
+      <div>
+        <button onClick={onConfirm}>Confirmar</button>
+        <button onClick={onCancel}>Cancelar</button>
+      </div>
+    ) : null
+  ),
+}));
+
 jest.mock("next/navigation", () => ({
   useRouter: () => ({ push: jest.fn() }),
 }));
@@ -39,11 +50,20 @@ describe("ChildrenTable", () => {
     expect(screen.getByRole("button", { name: /revisar maria silva/i })).toBeInTheDocument();
   });
 
-  test("calls onReview when review button is clicked", () => {
+  test("opens confirmation dialog when review button is clicked", () => {
     const onReview = jest.fn();
     render(<ChildrenTable children={children} onReview={onReview} reviewingId={null} />);
     
     fireEvent.click(screen.getByRole("button", { name: /revisar maria silva/i }));
+    expect(screen.getByText("Confirmar")).toBeInTheDocument();
+  });
+
+  test("calls onReview when confirmation is confirmed", () => {
+    const onReview = jest.fn();
+    render(<ChildrenTable children={children} onReview={onReview} reviewingId={null} />);
+    
+    fireEvent.click(screen.getByRole("button", { name: /revisar maria silva/i }));
+    fireEvent.click(screen.getByText("Confirmar"));
     expect(onReview).toHaveBeenCalledWith("1");
   });
 

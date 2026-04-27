@@ -8,6 +8,17 @@ jest.mock("@/components/StatusBadge/StatusBadge", () => ({
   ),
 }));
 
+jest.mock("@/components/ConfirmationReviewDialog/ConfirmationReviewDialog", () => ({
+  ConfirmationReviewDialog: ({ isOpen, onConfirm, onCancel }: any) => (
+    isOpen ? (
+      <div>
+        <button onClick={onConfirm}>Confirmar</button>
+        <button onClick={onCancel}>Cancelar</button>
+      </div>
+    ) : null
+  ),
+}));
+
 const baseChild: Child = {
   id: "1",
   nome: "Maria Silva",
@@ -48,19 +59,27 @@ describe("ChildStatusCard", () => {
   test("review button is disabled when already revisado", () => {
     const child: Child = { ...baseChild, revisado: true, revisado_por: "x", revisado_em: null };
     render(<ChildStatusCard child={child} onReview={jest.fn()} loading={false} />);
-    expect(screen.getByRole("button")).toBeDisabled();
+    expect(screen.getByRole("button", { name: /marcar como revisado/i })).toBeDisabled();
   });
 
   test("review button is disabled when loading", () => {
     render(<ChildStatusCard child={baseChild} onReview={jest.fn()} loading={true} />);
-    expect(screen.getByRole("button")).toBeDisabled();
-    expect(screen.getByText(/salvando/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /salvando/i })).toBeDisabled();
   });
 
-  test("calls onReview when clicked", () => {
+  test("opens confirmation dialog when review button is clicked", () => {
+    render(<ChildStatusCard child={baseChild} onReview={jest.fn()} loading={false} />);
+    fireEvent.click(screen.getByRole("button", { name: /marcar como revisado/i }));
+    expect(screen.getByText("Confirmar")).toBeInTheDocument();
+  });
+
+  test("calls onReview when confirmation is confirmed", () => {
     const onReview = jest.fn();
     render(<ChildStatusCard child={baseChild} onReview={onReview} loading={false} />);
-    fireEvent.click(screen.getByRole("button"));
+    
+    fireEvent.click(screen.getByRole("button", { name: /marcar como revisado/i }));
+    fireEvent.click(screen.getByText("Confirmar"));
+    
     expect(onReview).toHaveBeenCalledTimes(1);
   });
 });
