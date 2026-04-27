@@ -1,4 +1,4 @@
-import { type Child, getChildren, getChildById, updateChildReview } from "../data/children.store";
+import { type Child, getChildren, getChildById, updateChildReview } from "../../repositories/children.repository";
 
 export type ListChildrenFilters = {
   bairro?: string;

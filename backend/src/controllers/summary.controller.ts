@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getSummaryService } from "../services/summary.service";
+import { getSummaryService } from "../services/summary/summary.service";
 
 export const getSummary = async (
   _req: Request,

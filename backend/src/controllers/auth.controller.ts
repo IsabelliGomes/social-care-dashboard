@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { authenticateUser } from "../services/auth.service";
+import { authenticateUser } from "../services/auth/auth.service";
 
 export const createToken = (req: Request, res: Response): void => {
   const { email, password } = req.body;

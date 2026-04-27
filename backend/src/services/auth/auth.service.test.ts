@@ -1,4 +1,4 @@
-import { authenticateUser, verifyToken } from "../services/auth.service";
+import { authenticateUser, verifyToken } from "./auth.service";
 
 describe("auth service", () => {
   describe("authenticateUser", () => {

@@ -1,6 +1,6 @@
-import { getChildByIdService, listChildrenService, reviewChildService } from "../services/children.service";
-import * as store from "../data/children.store";
-import type { Child } from "../data/children.store";
+import { getChildByIdService, listChildrenService, reviewChildService } from "./children.service";
+import * as repo from "../../repositories/children.repository";
+import type { Child } from "../../repositories/children.repository";
 
 const mockedChild = (overrides: Partial<Child> = {}): Child => ({
   id: "c001",
@@ -17,16 +17,16 @@ const mockedChild = (overrides: Partial<Child> = {}): Child => ({
   ...overrides,
 });
 
-jest.mock("../data/children.store");
+jest.mock("../../repositories/children.repository");
 
-const mockGetChildren = store.getChildren as jest.MockedFunction<
-  typeof store.getChildren
+const mockGetChildren = repo.getChildren as jest.MockedFunction<
+  typeof repo.getChildren
 >;
-const mockGetChildById = store.getChildById as jest.MockedFunction<
-  typeof store.getChildById
+const mockGetChildById = repo.getChildById as jest.MockedFunction<
+  typeof repo.getChildById
 >;
-const mockUpdateChildReview = store.updateChildReview as jest.MockedFunction<
-  typeof store.updateChildReview
+const mockUpdateChildReview = repo.updateChildReview as jest.MockedFunction<
+  typeof repo.updateChildReview
 >;
 
 describe("children service", () => {

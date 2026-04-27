@@ -3,7 +3,7 @@ import {
   getChildByIdService,
   listChildrenService,
   reviewChildService,
-} from "../services/children.service";
+} from "../services/children/children.service";
 import { parseBoolean } from "../utils/parseBoolean";
 import type { AuthRequest } from "../middlewares/auth.middleware";
 

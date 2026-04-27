@@ -1,4 +1,4 @@
-import { getChildren } from "../data/children.store";
+import { getChildren } from "../../repositories/children.repository";
 
 export const getSummaryService = async () => {
   const children = await getChildren();

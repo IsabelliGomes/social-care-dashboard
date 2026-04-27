@@ -1,11 +1,11 @@
-import { getSummaryService } from "../services/summary.service";
-import * as store from "../data/children.store";
-import type { Child } from "../data/children.store";
+import { getSummaryService } from "./summary.service";
+import * as repo from "../../repositories/children.repository";
+import type { Child } from "../../repositories/children.repository";
 
-jest.mock("../data/children.store");
+jest.mock("../../repositories/children.repository");
 
-const mockGetChildren = store.getChildren as jest.MockedFunction<
-  typeof store.getChildren
+const mockGetChildren = repo.getChildren as jest.MockedFunction<
+  typeof repo.getChildren
 >;
 
 const mockedChild = (overrides: Partial<Child> = {}): Child => ({
