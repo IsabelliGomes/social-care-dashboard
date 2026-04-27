@@ -1,5 +1,5 @@
 import { render, screen, act } from "@testing-library/react";
-import ChildDetailPage from "./page";
+import { ChildDetailPageContent } from "./ChildDetailPageContent";
 import type { Child } from "@/types";
 
 jest.mock("next/navigation", () => ({
@@ -43,10 +43,10 @@ jest.mock("@/components/dashboard", () => ({
   AreaCard: ({ area }: { area: string }) => <div data-testid={`area-${area}`} />,
 }));
 
-describe("ChildDetailPage", () => {
+describe("ChildDetailPageContent", () => {
   test("renders child data after loading", async () => {
     await act(async () => {
-      render(<ChildDetailPage />);
+      render(<ChildDetailPageContent />);
     });
 
     expect(screen.getByTestId("detail-header")).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("ChildDetailPage", () => {
     (getChildById as jest.Mock).mockRejectedValueOnce(new Error("fail"));
 
     await act(async () => {
-      render(<ChildDetailPage />);
+      render(<ChildDetailPageContent />);
     });
 
     expect(screen.getByRole("alert")).toBeInTheDocument();

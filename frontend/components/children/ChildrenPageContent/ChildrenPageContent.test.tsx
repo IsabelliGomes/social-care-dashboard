@@ -1,6 +1,6 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { getChildren } from "@/lib/api";
-import ChildrenPage from "@/app/(dashboard)/children/page";
+import { ChildrenPageContent } from "./ChildrenPageContent";
 
 jest.mock("@/lib/api", () => ({
   getChildren: jest.fn(),
@@ -27,7 +27,7 @@ jest.mock("@/components/ui", () => ({
 
 const mockedGetChildren = getChildren as jest.MockedFunction<typeof getChildren>;
 
-describe("ChildrenPage", () => {
+describe("ChildrenPageContent", () => {
   beforeEach(() => {
     mockedGetChildren.mockResolvedValue({
       items: [
@@ -51,7 +51,7 @@ describe("ChildrenPage", () => {
 
   test("fetches children and renders the structure", async () => {
     await act(async () => {
-      render(<ChildrenPage />);
+      render(<ChildrenPageContent />);
     });
 
     expect(screen.getByTestId("topbar")).toBeInTheDocument();

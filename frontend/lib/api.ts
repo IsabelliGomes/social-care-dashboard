@@ -13,6 +13,15 @@ export const clearToken = (): void => {
   localStorage.removeItem("auth_token");
 };
 
+export const isTokenValid = (token: string): boolean => {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return typeof payload.exp === "number" && payload.exp * 1000 > Date.now();
+  } catch {
+    return false;
+  }
+};
+
 export const getAuthHeader = (): { Authorization: string } | {} => {
   const token = getToken();
   return token ? { Authorization: `Bearer ${token}` } : {};
