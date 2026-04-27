@@ -8,9 +8,9 @@ export function CtaBanner() {
       <div className={styles.content}>
         <ClipboardList size={28} className={styles.icon} aria-hidden="true" />
         <div>
-          <p className={styles.title}>Acompanhe e faça a diferença</p>
+          <p className={styles.title}>Casos que precisam de atenção</p>
           <p className={styles.description}>
-            Acesse a lista completa de crianças e registre as revisões em aberto para ajudar a garantir os diretos das crianças.
+            Veja crianças com alertas ativos e revisões pendentes.
           </p>
         </div>
       </div>
