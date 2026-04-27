@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TopBar } from "@/components/TopBar/TopBar";
-import { SummarySection } from "@/components/SummarySection/SummarySection";
-import { ChartsSection } from "@/components/ChartsSection/ChartsSection";
-import { CtaBanner } from "@/components/CtaBanner/CtaBanner";
+import { TopBar } from "@/components/layout";
+import { SummarySection, ChartsSection, CtaBanner } from "@/components/dashboard";
 import { getSummary } from "@/lib/api";
 import type { SummaryResponse } from "@/types";
 import styles from "./page.module.scss";

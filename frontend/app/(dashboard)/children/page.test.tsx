@@ -7,27 +7,21 @@ jest.mock("@/lib/api", () => ({
   reviewChild: jest.fn(),
 }));
 
-jest.mock("@/components/TopBar/TopBar", () => ({
+jest.mock("@/components/layout", () => ({
   TopBar: () => <div data-testid="topbar" />,
 }));
 
-jest.mock("@/components/ChildFilters/ChildFilters", () => ({
+jest.mock("@/components/children", () => ({
   ChildFilters: () => <div data-testid="filters" />,
-}));
-
-jest.mock("@/components/ChildrenTable/ChildrenTable", () => ({
   ChildrenTable: ({ children, onReview, reviewingId }: { children: unknown[]; onReview: jest.Mock; reviewingId: string | null }) => (
     <div data-testid="table" onClick={() => onReview("1")}>{children.length}</div>
   ),
-}));
-
-jest.mock("@/components/ChildrenCards/ChildrenCards", () => ({
   ChildrenCards: ({ children }: { children: unknown[] }) => (
     <div data-testid="cards">{children.length}</div>
   ),
 }));
 
-jest.mock("@/components/Pagination/Pagination", () => ({
+jest.mock("@/components/ui", () => ({
   Pagination: () => <div data-testid="pagination" />,
 }));
 

@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Sidebar } from "@/components/Sidebar/Sidebar";
-import { BottomBar } from "@/components/BottomBar/BottomBar";
+import { Sidebar, BottomBar } from "@/components/layout";
 import { getToken, clearToken } from "@/lib/api";
 import styles from "./layout.module.scss";
 

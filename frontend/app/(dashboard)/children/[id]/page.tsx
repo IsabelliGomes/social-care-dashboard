@@ -2,10 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { TopBar } from "@/components/TopBar/TopBar";
-import { ChildDetailHeader } from "@/components/ChildDetailHeader/ChildDetailHeader";
-import { AreaCard } from "@/components/AreaCard/AreaCard";
-import { ChildStatusCard } from "@/components/ChildStatusCard/ChildStatusCard";
+import { TopBar } from "@/components/layout";
+import { ChildDetailHeader, ChildStatusCard } from "@/components/children";
+import { AreaCard } from "@/components/dashboard";
 import { getChildById, reviewChild } from "@/lib/api";
 import type { Child } from "@/types";
 import styles from "./page.module.scss";

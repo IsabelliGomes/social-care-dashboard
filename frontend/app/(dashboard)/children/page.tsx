@@ -1,11 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { TopBar } from "@/components/TopBar/TopBar";
-import { ChildFilters, type Filters } from "@/components/ChildFilters/ChildFilters";
-import { ChildrenTable } from "@/components/ChildrenTable/ChildrenTable";
-import { ChildrenCards } from "@/components/ChildrenCards/ChildrenCards";
-import { Pagination } from "@/components/Pagination/Pagination";
+import { TopBar } from "@/components/layout";
+import { ChildFilters, type Filters, ChildrenTable, ChildrenCards } from "@/components/children";
+import { Pagination } from "@/components/ui";
 import { getChildren, reviewChild } from "@/lib/api";
 import type { Child, ListChildrenResponse } from "@/types";
 import styles from "./page.module.scss";

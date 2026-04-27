@@ -28,21 +28,18 @@ jest.mock("@/lib/api", () => {
   };
 });
 
-jest.mock("@/components/TopBar/TopBar", () => ({
+jest.mock("@/components/layout", () => ({
   TopBar: () => <div data-testid="topbar" />,
 }));
 
-jest.mock("@/components/ChildDetailHeader/ChildDetailHeader", () => ({
+jest.mock("@/components/children", () => ({
   ChildDetailHeader: ({ child }: { child: Child }) => (
     <div data-testid="detail-header">{child.nome}</div>
   ),
-}));
-
-jest.mock("@/components/ChildStatusCard/ChildStatusCard", () => ({
   ChildStatusCard: () => <div data-testid="status-card" />,
 }));
 
-jest.mock("@/components/AreaCard/AreaCard", () => ({
+jest.mock("@/components/dashboard", () => ({
   AreaCard: ({ area }: { area: string }) => <div data-testid={`area-${area}`} />,
 }));
 
