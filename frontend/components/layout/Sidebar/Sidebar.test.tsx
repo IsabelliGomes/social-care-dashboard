@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Sidebar } from "./Sidebar";
+import { SideBar } from "./SideBar";
 
 jest.mock("next/navigation", () => ({
   usePathname: () => "/dashboard",
@@ -18,37 +18,37 @@ jest.mock("@/lib/api", () => ({
   clearToken: jest.fn(),
 }));
 
-describe("Sidebar", () => {
+describe("SideBar", () => {
   test("renders sidebar navigation", () => {
-    render(<Sidebar />);
+    render(<SideBar />);
     expect(screen.getByRole("navigation", { name: /Navegação principal/ })).toBeInTheDocument();
   });
 
   test("renders navigation items", () => {
-    render(<Sidebar />);
+    render(<SideBar />);
     expect(screen.getByText("Dashboard")).toBeInTheDocument();
     expect(screen.getByText("Crianças")).toBeInTheDocument();
   });
 
   test("renders logo image", () => {
-    render(<Sidebar />);
+    render(<SideBar />);
     expect(screen.getByAltText("Cuidado Social")).toBeInTheDocument();
   });
 
   test("renders logout button", () => {
-    render(<Sidebar />);
+    render(<SideBar />);
     expect(screen.getByRole("button", { name: /Sair da aplicação/ })).toBeInTheDocument();
   });
 
   test("calls clearToken when logout is clicked", async () => {
     const { clearToken } = await import("@/lib/api");
-    render(<Sidebar />);
+    render(<SideBar />);
     await userEvent.click(screen.getByRole("button", { name: /Sair da aplicação/ }));
     expect(clearToken).toHaveBeenCalled();
   });
 
   test("marks current page as active", () => {
-    render(<Sidebar />);
+    render(<SideBar />);
     const dashboardLink = screen.getByText("Dashboard").closest("a");
     expect(dashboardLink).toHaveAttribute("aria-current", "page");
   });

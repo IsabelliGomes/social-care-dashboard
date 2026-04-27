@@ -1,4 +1,4 @@
-import { Sidebar, BottomBar } from "@/components/layout";
+import { SideBar, BottomBar } from "@/components/layout";
 import { AuthGuard } from "@/components/auth";
 import styles from "./layout.module.scss";
 
@@ -10,7 +10,7 @@ export default function DashboardLayout({
   return (
     <AuthGuard>
       <div className={styles.shell}>
-        <Sidebar />
+        <SideBar />
         <div className={styles.main}>
           {children}
         </div>

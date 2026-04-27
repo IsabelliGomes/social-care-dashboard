@@ -1,3 +1,4 @@
+"use client";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -19,7 +20,7 @@ function getAlertAreas(child: Child) {
   return areas;
 }
 
-type ChildrenTableProps = {
+export type ChildrenTableProps = {
   children: Child[];
   onReview: (id: string) => void;
   reviewingId: string | null;

@@ -1,3 +1,4 @@
+"use client";
 import { ElementType } from "react";
 import styles from "./SummaryCard.module.scss";
 

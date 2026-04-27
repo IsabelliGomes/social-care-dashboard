@@ -1,3 +1,4 @@
+"use client";
 import { Heart, GraduationCap, HandHeart } from "lucide-react";
 import type { ReactNode } from "react";
 import styles from "./AreaCard.module.scss";

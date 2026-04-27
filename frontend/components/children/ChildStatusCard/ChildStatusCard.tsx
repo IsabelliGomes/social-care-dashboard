@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { StatusBadge } from "@/components/ui";
 import { ConfirmationReviewDialog } from "../ConfirmationReviewDialog/ConfirmationReviewDialog";
@@ -8,7 +9,7 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("pt-BR");
 }
 
-type ChildStatusCardProps = {
+export type ChildStatusCardProps = {
   child: Child;
   onReview: () => void;
   loading: boolean;

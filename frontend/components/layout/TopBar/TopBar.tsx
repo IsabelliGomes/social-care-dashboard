@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
 import styles from "./TopBar.module.scss";

@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { TopBar } from "@/components/layout";
 import { SummarySection, ChartsSection, CtaBanner } from "@/components/dashboard";

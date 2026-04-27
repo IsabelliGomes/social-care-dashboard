@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { AlertBadge } from "@/components/ui";
