@@ -1,12 +1,7 @@
 .card {
-  background-color: #ffffff;
-  border-radius: 0.75rem;
+  @apply bg-white rounded-card flex flex-col gap-2 border-l-4 border-l-transparent;
   padding: 1.25rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  border-left: 4px solid transparent;
   transition: box-shadow 0.15s ease;
 
   &:hover {
@@ -14,51 +9,46 @@
   }
 }
 
-.accent-primary  { border-left-color: #1e3a8a; }
-.accent-alert    { border-left-color: #dc2626; }
-.accent-attention { border-left-color: #f59e0b; }
-.accent-info     { border-left-color: #2563eb; }
-.accent-success  { border-left-color: #16a34a; }
-
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @apply flex items-center justify-between;
 }
 
 .title {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  @apply text-2xl font-medium text-secondary;
+}
+
+.content {
+  @apply h-28 flex items-center justify-around;
 }
 
 .iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.5rem;
+  @apply flex items-center justify-center w-16 h-16 rounded-full;
 }
 
-.icon-primary   { background-color: #e0e9ff; color: #1e3a8a; }
-.icon-alert     { background-color: #fee2e2; color: #dc2626; }
-.icon-attention { background-color: #fef3c7; color: #f59e0b; }
-.icon-info      { background-color: #dbeafe; color: #2563eb; }
-.icon-success   { background-color: #dcfce7; color: #16a34a; }
+.details {
+  @apply flex flex-col items-center justify-center gap-1;
+}
 
 .value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 0;
+  @apply text-5xl font-bold text-primary m-0;
   line-height: 1.1;
 }
 
 .description {
+  @apply text-secondary m-0;
   font-size: 0.8125rem;
-  color: #6b7280;
-  margin: 0;
 }
+
+/* Accent border-left color variants */
+.accent-primary   { @apply border-l-primary-600; }
+.accent-alert     { @apply border-l-alert; }
+.accent-attention { @apply border-l-attention; }
+.accent-info      { @apply border-l-info; }
+.accent-success   { @apply border-l-success; }
+
+/* Icon wrapper background + color variants */
+.icon-primary   { @apply bg-primary-100 text-primary-600; }
+.icon-alert     { @apply bg-health-bg text-alert; }
+.icon-attention { @apply bg-education-bg text-attention; }
+.icon-info      { @apply bg-brand-100 text-info; }
+.icon-success   { @apply bg-green-100 text-success; }

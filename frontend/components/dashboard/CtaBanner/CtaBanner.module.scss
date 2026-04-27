@@ -1,58 +1,40 @@
 .banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @apply flex items-center justify-between rounded-card flex-wrap;
   gap: 1.5rem;
   background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-  border-radius: 0.75rem;
   padding: 1.5rem 2rem;
-  flex-wrap: wrap;
 }
 
 .content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  @apply flex items-center gap-4;
 }
 
 .icon {
+  @apply flex-shrink-0;
   color: rgba(255, 255, 255, 0.85);
-  flex-shrink: 0;
 }
 
 .title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
+  @apply text-base font-semibold text-white;
 }
 
 .description {
-  font-size: 0.875rem;
+  @apply text-sm mt-1;
   color: rgba(255, 255, 255, 0.75);
-  margin-top: 0.25rem;
 
   @media (max-width: 768px) {
-    display: none;
+    @apply hidden;
   }
 }
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  @apply inline-flex items-center gap-2 bg-white text-brand-800 font-semibold rounded-lg no-underline whitespace-nowrap flex-shrink-0;
   padding: 0.625rem 1.25rem;
-  background-color: #ffffff;
-  color: #1e3a8a;
   font-size: 0.9375rem;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  white-space: nowrap;
   transition: background-color 0.15s ease, color 0.15s ease;
-  flex-shrink: 0;
 
   &:hover {
-    background-color: #e0e9ff;
+    @apply bg-brand-100;
   }
 
   &:focus-visible {

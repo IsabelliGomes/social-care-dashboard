@@ -1,4 +1,4 @@
-import { Users, Heart, BookOpen, HandHeart } from "lucide-react";
+import { Users, HeartPulseIcon, GraduationCap, HeartHandshake } from "lucide-react";
 import { SummaryCard } from "../SummaryCard/SummaryCard";
 import type { SummaryResponse } from "@/types";
 import styles from "./SummarySection.module.scss";
@@ -21,21 +21,21 @@ export function SummarySection({ summary, loading }: SummarySectionProps) {
       <SummaryCard
         title="Alertas de Saúde"
         value={loading ? "—" : summary?.alertsByArea.saude ?? 0}
-        icon={Heart}
+        icon={HeartPulseIcon}
         accent="alert"
         description="crianças com alerta"
       />
       <SummaryCard
         title="Alertas de Educação"
         value={loading ? "—" : summary?.alertsByArea.educacao ?? 0}
-        icon={BookOpen}
+        icon={GraduationCap}
         accent="attention"
         description="crianças com alerta"
       />
       <SummaryCard
         title="Alertas de Assistência"
         value={loading ? "—" : summary?.alertsByArea.assistenciaSocial ?? 0}
-        icon={HandHeart}
+        icon={HeartHandshake}
         accent="info"
         description="crianças com alerta"
       />

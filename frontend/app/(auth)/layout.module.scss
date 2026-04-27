@@ -1,8 +1,4 @@
 .auth-layout {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  @apply min-h-screen flex items-center justify-center p-4;
   background: linear-gradient(135deg, #f8fbff 0%, #e8efff 100%);
 }

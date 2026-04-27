@@ -1,85 +1,60 @@
 .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
+  @apply flex items-center justify-between gap-4 flex-wrap;
 }
 
 .summary {
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin: 0;
+  @apply text-sm text-secondary m-0;
 }
 
 .nav {
-  display: flex;
-  align-items: center;
+  @apply flex items-center;
   gap: 0.375rem;
 }
 
 .navButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
+  @apply inline-flex items-center gap-1 border border-neutral rounded-md bg-white text-primary-700 text-sm font-medium cursor-pointer;
   padding: 0.4375rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  background-color: #ffffff;
-  color: #374151;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
   transition: background-color 0.15s ease;
 
   &:hover:not(:disabled) {
-    background-color: #f3f4f6;
+    @apply bg-primary-100;
   }
 
   &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+    @apply opacity-40 cursor-not-allowed;
   }
 
   &:focus-visible {
-    outline: 2px solid #1e3a8a;
+    outline: 2px solid theme("colors.brand.800");
     outline-offset: 2px;
   }
 }
 
 .pages {
-  display: flex;
+  @apply flex;
   gap: 0.25rem;
 }
 
 .pageButton {
-  width: 2rem;
-  height: 2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  background-color: #ffffff;
-  color: #374151;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
+  @apply inline-flex items-center justify-center w-8 h-8 border border-neutral rounded-md bg-white text-primary-700 text-sm font-medium cursor-pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 
-  &:hover:not(.pageButtonActive) {
-    background-color: #f3f4f6;
+  /* Active state's hover is handled by .pageButtonActive below */
+  &:hover {
+    @apply bg-primary-100;
   }
 
   &:focus-visible {
-    outline: 2px solid #1e3a8a;
+    outline: 2px solid theme("colors.brand.800");
     outline-offset: 2px;
   }
 }
 
 .pageButtonActive {
-  background-color: #1e3a8a;
-  border-color: #1e3a8a;
-  color: #ffffff;
-  cursor: default;
+  @apply bg-brand-800 border-brand-800 text-white cursor-default;
+
+  /* Prevent hover override from .pageButton */
+  &:hover {
+    @apply bg-brand-800;
+  }
 }

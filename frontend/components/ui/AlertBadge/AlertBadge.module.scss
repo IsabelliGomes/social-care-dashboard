@@ -1,24 +1,16 @@
 .badge {
-  display: inline-flex;
-  align-items: center;
+  @apply inline-flex items-center rounded-full text-xs font-medium whitespace-nowrap;
   padding: 0.1875rem 0.625rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  white-space: nowrap;
 }
 
 .saude {
-  background-color: #fee2e2;
-  color: #dc2626;
+  @apply bg-health-bg text-alert;
 }
 
 .educacao {
-  background-color: #fef3c7;
-  color: #d97706;
+  @apply bg-amber-100 text-amber-600;
 }
 
 .assistenciaSocial {
-  background-color: #dbeafe;
-  color: #2563eb;
+  @apply bg-blue-100 text-blue-600;
 }
