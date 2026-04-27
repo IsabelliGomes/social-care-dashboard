@@ -28,10 +28,18 @@ export const apiCall = async (
     ...options.headers,
   };
 
-  return fetch(`${API_URL}${endpoint}`, {
+  const response = await fetch(`${API_URL}${endpoint}`, {
     ...options,
     headers,
   });
+
+  if (response.status === 401) {
+    clearToken();
+    window.location.replace("/");
+    throw new Error("Session expired");
+  }
+
+  return response;
 };
 
 export const getSummary = async (): Promise<import("@/types").SummaryResponse> => {
