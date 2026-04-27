@@ -18,7 +18,18 @@ services:
     ports:
       - "3001:3001"
     environment:
-      DATABASE_URL: postgres://app:app@db:5432/social_care
+      DATABASE_URL: postgres://app:postgres@db:5432/social_care
+      JWT_SECRET: "change-me-in-production"
     depends_on:
       db:
         condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
