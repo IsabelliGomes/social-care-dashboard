@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, Users, LogOut } from "lucide-react";
 import { clearToken } from "@/lib/api";
 import { routes } from "@/lib/routes";
-import styles from "./Sidebar.module.scss";
+import styles from "./SideBar.module.scss";
 
 const navItems = [
   { label: "Dashboard", href: routes.dashboard, icon: LayoutDashboard },
