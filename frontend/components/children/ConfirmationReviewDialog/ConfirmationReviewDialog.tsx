@@ -66,7 +66,13 @@ export function ConfirmationReviewDialog({
   if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onCancel} aria-hidden="true">
+    <div className={styles.wrapper}>
+      <div
+        className={styles.backdrop}
+        role="presentation"
+        onClick={onCancel}
+        aria-hidden="true"
+      />
       <div
         ref={dialogRef}
         className={styles.dialog}

@@ -1,11 +1,18 @@
-.overlay {
+.wrapper {
   @apply fixed inset-0 flex items-center justify-center;
   z-index: 1000;
+  padding: 1rem;
+}
+
+.backdrop {
+  @apply absolute inset-0;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
 .dialog {
-  @apply bg-surface rounded-card;
+  @apply bg-surface rounded-card relative;
+  z-index: 1;
   width: 90%;
   max-width: 400px;
   padding: 1.5rem;

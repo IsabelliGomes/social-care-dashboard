@@ -108,7 +108,7 @@ describe("ConfirmationReviewDialog", () => {
         onCancel={mockOnCancel}
       />
     );
-    const overlay = screen.getByRole("presentation");
+    const overlay = screen.getByRole("presentation", { hidden: true });
     await userEvent.click(overlay);
     expect(mockOnCancel).toHaveBeenCalled();
   });
