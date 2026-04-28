@@ -8,6 +8,8 @@ import { requireAuth } from "../middlewares/auth.middleware";
 
 export const childrenRouter = Router();
 
+childrenRouter.use(requireAuth);
+
 childrenRouter.get("/", (req, res, next) => {
   Promise.resolve(listChildren(req, res)).catch(next);
 });
@@ -16,6 +18,6 @@ childrenRouter.get("/:id", (req, res, next) => {
   Promise.resolve(getChildById(req, res)).catch(next);
 });
 
-childrenRouter.patch("/:id/review", requireAuth, (req, res, next) => {
+childrenRouter.patch("/:id/review", (req, res, next) => {
   Promise.resolve(reviewChild(req, res)).catch(next);
 });
