@@ -6,14 +6,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, Users, LogOut } from "lucide-react";
 import { clearToken } from "@/lib/api";
 import { routes } from "@/lib/routes";
-import styles from "./SideBar.module.scss";
+import styles from "./LateralBar.module.scss";
 
 const navItems = [
   { label: "Dashboard", href: routes.dashboard, icon: LayoutDashboard },
   { label: "Crianças", href: "/children", icon: Users },
 ];
 
-export function SideBar() {
+export function LateralBar() {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -23,7 +23,7 @@ export function SideBar() {
   }
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={styles.lateralBar}>
       <div className={styles.logo}>
         <Image
           src="/logo-social-care.png"

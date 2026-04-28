@@ -1,51 +1,51 @@
-.sidebar {
+.lateralBar {
     @apply flex flex-col min-h-screen bg-brand-dark fixed top-0 left-0 bottom-0 z-40;
     width: 220px;
     padding: 1.5rem 1rem;
-  
+
     @media (max-width: 767px) {
       @apply hidden;
     }
   }
-  
+
   .logo {
     @apply flex items-center justify-center mb-6;
     padding-bottom: 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
-  
+
   .nav {
     @apply flex-1;
   }
-  
+
   .navList {
     @apply list-none m-0 p-0 flex flex-col;
     gap: 0.25rem;
   }
-  
+
   .navItem {
     @apply flex items-center gap-3 rounded-lg font-medium no-underline;
     padding: 0.625rem 0.875rem;
     color: rgba(255, 255, 255, 0.72);
     font-size: 0.9375rem;
     transition: background-color 0.15s ease, color 0.15s ease;
-  
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
       @apply text-white;
     }
   }
-  
+
   .navItemActive {
     @apply text-white;
     background-color: rgba(255, 255, 255, 0.15);
   }
-  
+
   .footer {
     @apply pt-6;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
-  
+
   .logoutButton {
     @apply flex items-center gap-3 w-full rounded-lg font-medium text-left cursor-pointer;
     padding: 0.625rem 0.875rem;
@@ -54,10 +54,9 @@
     color: rgba(255, 255, 255, 0.72);
     font-size: 0.9375rem;
     transition: background-color 0.15s ease, color 0.15s ease;
-  
+
     &:hover {
       background-color: rgba(220, 38, 38, 0.18);
       @apply text-red-300;
     }
   }
-  
