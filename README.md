@@ -1,10 +1,38 @@
 ﻿# Social Care Dashboard
 
-Painel full-stack para acompanhamento de crianças em situação de vulnerabilidade social.
+Painel full-stack desenvolvido para apoiar técnicos de campo no acompanhamento de crianças em situação de vulnerabilidade social.
+
+A aplicação centraliza indicadores de **saúde, educação e assistência social**, permitindo identificar alertas ativos, consultar casos rapidamente e registrar revisões realizadas em campo.
+
+Projetado com foco em **usabilidade, performance e responsividade**, considerando acesso frequente por celular e computadores simples.
+
+## Requisitos atendidos
+
+✅ Login com JWT e proteção de rotas  
+✅ Dashboard com indicadores agregados  
+✅ Lista com filtros e paginação  
+✅ Tela de detalhe da criança  
+✅ Marcar caso como revisado  
+✅ Dados parciais tratados na interface  
+✅ Layout responsivo (mobile → desktop)  
+✅ Docker Compose sobe tudo do zero  
+✅ Tema claro/escuro  
+✅ Testes unitários (backend e frontend)
+
+## Stack
+
+| Camada   | Tecnologias |
+|----------|-------------|
+| Frontend | Next.js (App Router), React, TypeScript, Tailwind CSS |
+| Backend  | Node.js, Express, TypeScript, PostgreSQL, JWT |
+| Testes   | Jest |
+| Infra    | Docker + Docker Compose |
+
+Para desenvolvimento local alinhado às imagens Docker, use **Node.js 22+** e **npm**.
 
 ## Como rodar
 
-### Com Docker (recomendado)
+### Com Docker local
 
 ```bash
 docker compose up
@@ -28,6 +56,8 @@ Depois de subir, acesse:
 
 ### Localmente
 
+É necessário um PostgreSQL acessível (por exemplo o do seu `docker compose up db`).
+
 #### Backend
 
 ```bash
@@ -44,6 +74,8 @@ JWT_SECRET=change-me
 PORT=3001
 ```
 
+Opcional: `CORS_ORIGIN` (padrão `http://localhost:3000`).
+
 #### Frontend
 
 ```bash
@@ -58,6 +90,15 @@ Variável opcional:
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
+## API (resumo)
+
+Rotas expostas na raiz do servidor:
+
+- `POST /auth/token` — autenticação e JWT (JSON `{ "email", "password" }`)
+- `GET /children`, `GET /children/:id`, `PATCH /children/:id/review` — listagem, detalhe e revisão de status (rotas protegidas por Bearer token)
+- `GET /summary` — agregados para o dashboard (protegida)
+- `GET /health` — disponibilidade do serviço
+
 ## Credenciais de teste
 
 - E-mail: `tecnico@prefeitura.rio`
@@ -67,62 +108,99 @@ O JWT emitido pelo backend inclui o campo `preferred_username` com o e-mail aute
 
 ## Decisões arquiteturais e trade-offs
 
-### Backend em Node.js + Express
+### Backend em Node.js + Express + TypeScript
 
-**Decisão:** Express com TypeScript, sem ORM.  
-**Trade-off:** mais controle sobre SQL e sem overhead de mapeamento, mas queries manuais exigem mais cuidado com segurança (SQL injection) — mitigado com queries parametrizadas via `pg`.
+**Decisão:** escolhi Node.js com Express e TypeScript pela velocidade de desenvolvimento, ecossistema maduro e excelente aderência a APIs REST.
+
+**Trade-off:** frameworks mais opinados poderiam reduzir código boilerplate, porém Express ofereceu flexibilidade total para estruturar o projeto e entregar rapidamente.
+
+---
 
 ### PostgreSQL como persistência
 
-**Decisão:** banco relacional real em vez de JSON em memória.  
-**Trade-off:** aproxima o desafio de um cenário real, mas adiciona a necessidade do Docker para rodar localmente.
+**Decisão:** utilizei PostgreSQL em vez de manter os dados em memória ou em arquivos JSON.
 
-### Repository pattern
+**Trade-off:** aumenta a complexidade inicial da infraestrutura, mas aproxima a solução de um ambiente real, permite consultas relacionais, paginação eficiente e persistência confiável.
 
-A camada de acesso a dados fica em `backend/src/repositories/children.repository.ts`, separando SQL da regra de negócio.  
-**Trade-off:** mais arquivos, mas permite testar services com mocks sem tocar o banco.
+---
 
-### Services por domínio
+### SQL direto via `pg` (sem ORM)
 
-Os services foram organizados em subpastas por domínio (`auth/`, `children/`, `summary/`), colocando testes ao lado do código que testam.  
-**Trade-off:** estrutura mais verbosa que um único arquivo plano, porém mais fácil de escalar.
+**Decisão:** optei por queries SQL parametrizadas usando `pg`, sem ORM.
 
-### Frontend por domínio
+**Trade-off:** exige maior cuidado manual nas queries e modelagem, porém evita abstrações desnecessárias e oferece controle total sobre performance e estrutura dos dados.
 
-Os componentes foram agrupados em:
+---
 
-- `ui/` — componentes reutilizáveis
-- `layout/` — navegação e shell
-- `dashboard/` — tela inicial e gráficos
-- `children/` — lista, detalhe e revisão
-- `auth/` — login e landing page
+### Separação em camadas (routes → controllers → services → repositories)
 
-**Trade-off:** mais diretórios, mas buscas e refatorações ficam isoladas por contexto.
+**Decisão:** organizei o backend em responsabilidades claras:
+- rotas recebem requests
+- controllers tratam HTTP
+- services concentram regras de negócio
+- repositories acessam dados
 
-### Barrel exports
+**Trade-off:** adiciona mais arquivos e estrutura inicial, porém melhora manutenção, testes e escalabilidade do código.
 
-Cada grupo expõe um `index.ts`:
+---
 
-```ts
-import { Button } from "@/components/ui";
-```
+### Organização frontend por domínio
 
-**Trade-off:** imports mais limpos, mas pode dificultar tree-shaking em bundles muito grandes (não é problema nessa escala).
+**Decisão:** os componentes foram agrupados por contexto funcional (`auth`, `dashboard`, `children`, `layout`, `ui`).
 
-### Armazenamento do token (localStorage)
+**Trade-off:** exige mais disciplina estrutural, porém reduz acoplamento e facilita evolução de cada área da aplicação de forma independente.
 
-**Decisão:** JWT em `localStorage` com validação de expiração no cliente.  
-**Trade-off:** simples de implementar e suficiente para o desafio, mas vulnerável a XSS. Em produção migraria para cookie `httpOnly` + CSRF token.
+---
 
-## O que faria com mais tempo
+### Autenticação baseada em JWT
 
-- mover a filtragem de crianças para SQL no backend
-- reforçar a proteção de rotas com `middleware.ts`
-- melhorar acessibilidade de modais e tabelas
-- adicionar E2E com Playwright
-- publicar um deploy acessível
-- incluir dark mode
-- melhorar feedback visual em estados de erro e loading
+**Decisão:** JWT stateless para autenticação entre frontend e backend.
+
+**Trade-off:** simplifica integração e escalabilidade horizontal, porém exige cuidado extra com expiração, logout e armazenamento seguro do token.
+
+---
+
+### Gerenciamento de segredos no ambiente local
+
+**Decisão:** para permitir que o projeto seja executado imediatamente com `docker compose up`, as variáveis necessárias para o desafio (incluindo `JWT_SECRET`) foram declaradas diretamente no ambiente local do Docker Compose.
+
+**Trade-off:** simplifica a avaliação e elimina etapas extras de configuração, porém não é a abordagem recomendada para produção.
+
+Na versão publicada, segredos sensíveis ficam externalizados em variáveis de ambiente gerenciadas pela plataforma de hospedagem, sem exposição no repositório ou em arquivos versionados.
+
+---
+
+### Armazenamento do token no frontend
+
+**Decisão:** para o escopo do desafio, o JWT foi armazenado no `localStorage`, com verificação de expiração no cliente e redirecionamento automático para login quando necessário.
+
+**Trade-off:** solução simples e rápida de implementar, adequada para o desafio, porém menos robusta para aplicações reais.
+
+Em produção, priorizaria mecanismos mais seguros de sessão, com token armazenado no servidor ou em cookies protegidos.
+
+## Pontos de evolução
+
+### Produto / UX
+- Busca textual por nome da criança ou responsável
+- Ordenação por nome, idade ou data da última revisão
+- Histórico de revisões realizadas, com data e técnico responsável
+- Exportação CSV da listagem para uso operacional
+- Cadastro e gestão de técnicos pela própria interface
+
+### Engenharia
+- Middleware de autenticação no frontend via Next.js Middleware
+- Testes E2E com Playwright cobrindo fluxos críticos
+- Observabilidade com logs estruturados, métricas e alertas
+- Rate limiting e hardening de segurança nos endpoints
+- Controle de perfis e permissões (RBAC) para múltiplos técnicos
+
+### Escalabilidade
+- Filtros, busca e paginação processados integralmente no banco
+- Índices otimizados para consultas frequentes
+- Cache para endpoint `/summary`
+- Processamento assíncrono para cargas e sincronizações futuras
+
+As evoluções priorizadas dependeriam do contexto real de uso, volume de acessos e feedback dos técnicos em campo.
 
 ## Testes
 
@@ -143,7 +221,21 @@ npm test
 ## Estrutura resumida
 
 ```text
-backend/
-frontend/
-docker-compose.yml
+social-care-dashboard/
+├── backend/
+│   ├── src/
+│   │   ├── app.ts
+│   │   ├── server.ts
+│   │   ├── controllers/
+│   │   ├── db/          # schema, seed, client
+│   │   ├── middlewares/
+│   │   ├── repositories/
+│   │   ├── routes/
+│   │   └── services/
+│   └── Dockerfile
+├── frontend/
+│   ├── app/             # rotas Next.js (App Router)
+│   ├── components/
+│   └── lib/
+└── docker-compose.yml
 ```
