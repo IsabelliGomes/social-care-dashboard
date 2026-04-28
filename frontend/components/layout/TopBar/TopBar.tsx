@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/ui";
 import styles from "./TopBar.module.scss";
 
 function getGreeting(): string {
@@ -41,6 +42,9 @@ export function TopBar() {
         <p className={styles.greetingSubtitle}>
           Painel de Acompanhamento de Crianças
         </p>
+      </div>
+      <div className={styles.actions}>
+        <ThemeToggle />
       </div>
     </header>
   );

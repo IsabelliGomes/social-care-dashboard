@@ -19,7 +19,7 @@ export const Home = () => {
           width={720}
           height={480}
           priority
-          className={styles.home__logo}
+          className="h-100 w-auto"
         />
 
         <Button

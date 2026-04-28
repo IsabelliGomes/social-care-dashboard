@@ -81,7 +81,10 @@ export function ChildrenTable({ children, onReview, reviewingId }: ChildrenTable
                   className={styles.row}
                   onClick={(e) => handleRowClick(child.id, e)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") handleRowClick(child.id, e as any);
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleRowClick(child.id, e as any);
+                    }
                   }}
                   role="button"
                   tabIndex={0}

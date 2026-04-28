@@ -10,7 +10,7 @@
   }
 
   &__input {
-    @apply w-full rounded-lg border border-neutral bg-white text-primary outline-none;
+    @apply w-full rounded-lg border border-neutral bg-surface text-primary outline-none;
     padding: 0.75rem 1rem;
     transition:
       border-color 0.2s ease,
@@ -22,7 +22,7 @@
     }
 
     &:focus {
-      @apply border-brand-800;
+      @apply border-brand-dark;
       box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
     }
 
@@ -35,7 +35,7 @@
     }
 
     &--disabled {
-      @apply cursor-not-allowed bg-primary-100 text-secondary;
+      @apply cursor-not-allowed bg-surface-light text-secondary;
     }
   }
 

@@ -7,6 +7,8 @@ const config: Config = {
     "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
+  darkMode: "class",
+
   theme: {
     extend: {
       fontFamily: {
@@ -14,35 +16,15 @@ const config: Config = {
       },
 
       colors: {
-        primary: {
-          DEFAULT: "#111827",
-          50: "#f9fafb",
-          100: "#f3f4f6",
-          200: "#e5e7eb",
-          300: "#d1d5db",
-          400: "#9ca3af",
-          500: "#6b7280",
-          600: "#4b5563",
-          700: "#374151",
-          800: "#1f2937",
-          900: "#111827",
-        },
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
 
-        brand: {
-          DEFAULT: "#1e3a8a",
-          50: "#f8fbff",
-          100: "#e0e9ff",
-          500: "#3b82f6",
-          600: "#2563eb",
-          700: "#1e40af",
-          800: "#1e3a8a",
-          900: "#172554",
-        },
+        "brand-light": "#e0e9ff", // 100
+        "brand-medium": "#3b82f6", // 500 == 700
+        "brand-dark": "#1e3a8a", // 800 == 900
 
-        secondary: "#6b7280",
-
-        surface: "#ffffff",
-        "surface-light": "#f9fafb",
+        surface: "var(--color-surface)",
+        "surface-light": "var(--color-surface-light)",
 
         alert: "#dc2626",
         attention: "#f59e0b",
@@ -59,13 +41,15 @@ const config: Config = {
         "assistance-bg": "#dff8f7",
 
         text: {
-          primary: "#111827",
-          secondary: "#6b7280",
+          primary: "var(--color-primary)",
+          secondary: "var(--color-secondary)",
         },
+
+        border: "var(--color-border)",
       },
 
       boxShadow: {
-        card: "0 4px 14px rgba(0,0,0,0.06)",
+        card: "0 4px 14px var(--color-card-shadow)",
       },
 
       borderRadius: {

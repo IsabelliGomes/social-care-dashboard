@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex items-end gap-4 bg-white rounded-card flex-wrap;
+  @apply flex items-end gap-4 bg-surface rounded-card flex-wrap;
   padding: 1.25rem 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
@@ -15,7 +15,7 @@
 }
 
 .label {
-  @apply font-medium text-primary-700;
+  @apply font-medium text-primary;
   font-size: 0.8125rem;
 }
 
@@ -28,18 +28,18 @@
   background-position: right 0.625rem center;
 
   &:focus-visible {
-    outline: 2px solid theme("colors.brand.800");
+    outline: 2px solid color-brand-dark;
     outline-offset: 2px;
   }
 }
 
 .clearButton {
-  @apply inline-flex items-center gap-2 border border-brand-800 rounded-lg bg-transparent text-brand-800 text-sm font-medium cursor-pointer whitespace-nowrap;
+  @apply inline-flex items-center gap-2 border border-brand-dark rounded-lg bg-transparent text-brand-dark text-sm font-medium cursor-pointer whitespace-nowrap;
   padding: 0.5rem 1rem;
   transition: background-color 0.15s ease;
 
   &:hover:not(:disabled) {
-    @apply bg-brand-100;
+    @apply bg-brand-light;
   }
 
   &:disabled {
@@ -48,13 +48,13 @@
   }
 
   &:focus-visible {
-    outline: 2px solid theme("colors.brand.800");
+    outline: 2px solid color-brand-dark;
     outline-offset: 2px;
   }
 }
 
 .badge {
-  @apply inline-flex items-center justify-center rounded-full bg-brand-800 text-white font-bold;
+  @apply inline-flex items-center justify-center rounded-full bg-brand-dark text-white font-bold;
   width: 1.125rem;
   height: 1.125rem;
   font-size: 0.6875rem;

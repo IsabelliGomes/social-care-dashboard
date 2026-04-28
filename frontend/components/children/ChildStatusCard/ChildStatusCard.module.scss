@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white rounded-card flex flex-col;
+  @apply bg-surface rounded-card flex flex-col;
   padding: 1.25rem;
   gap: 0.875rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -19,16 +19,16 @@
 }
 
 .reviewButton {
-  @apply self-start rounded-lg text-sm font-semibold bg-brand-800 text-white border-0 cursor-pointer;
+  @apply self-start rounded-lg text-sm font-semibold bg-brand-dark text-white border-0 cursor-pointer;
   padding: 0.5rem 1rem;
   transition: background-color 0.15s, opacity 0.15s;
 
   &:hover:not(:disabled) {
-    @apply bg-brand-700;
+    @apply bg-brand-medium;
   }
 
   &:focus-visible {
-    outline: 2px solid theme("colors.brand.500");
+    outline: 2px solid color-brand-medium;
     outline-offset: 2px;
   }
 

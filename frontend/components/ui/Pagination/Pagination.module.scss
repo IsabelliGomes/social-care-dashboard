@@ -12,12 +12,12 @@
 }
 
 .navButton {
-  @apply inline-flex items-center gap-1 border border-neutral rounded-md bg-white text-primary-700 text-sm font-medium cursor-pointer;
+  @apply inline-flex items-center gap-1 border border-neutral rounded-md bg-surface text-primary text-sm font-medium cursor-pointer;
   padding: 0.4375rem 0.75rem;
   transition: background-color 0.15s ease;
 
   &:hover:not(:disabled) {
-    @apply bg-primary-100;
+    @apply bg-surface-light;
   }
 
   &:disabled {
@@ -25,7 +25,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid theme("colors.brand.800");
+    outline: 2px solid color-brand-dark;
     outline-offset: 2px;
   }
 }
@@ -36,25 +36,25 @@
 }
 
 .pageButton {
-  @apply inline-flex items-center justify-center w-8 h-8 border border-neutral rounded-md bg-white text-primary-700 text-sm font-medium cursor-pointer;
+  @apply inline-flex items-center justify-center w-8 h-8 border border-neutral rounded-md bg-surface text-primary text-sm font-medium cursor-pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 
   /* Active state's hover is handled by .pageButtonActive below */
   &:hover {
-    @apply bg-primary-100;
+    @apply bg-surface-light;
   }
 
   &:focus-visible {
-    outline: 2px solid theme("colors.brand.800");
+    outline: 2px solid color-brand-dark;
     outline-offset: 2px;
   }
 }
 
 .pageButtonActive {
-  @apply bg-brand-800 border-brand-800 text-white cursor-default;
+  @apply bg-brand-dark border-brand-dark text-white cursor-default;
 
   /* Prevent hover override from .pageButton */
   &:hover {
-    @apply bg-brand-800;
+    @apply bg-brand-dark;
   }
 }

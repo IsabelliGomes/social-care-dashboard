@@ -28,13 +28,13 @@
 }
 
 .button {
-  @apply inline-flex items-center gap-2 bg-white text-brand-800 font-semibold rounded-lg no-underline whitespace-nowrap flex-shrink-0;
+  @apply inline-flex items-center gap-2 bg-white text-brand-dark font-semibold rounded-lg no-underline whitespace-nowrap flex-shrink-0;
   padding: 0.625rem 1.25rem;
   font-size: 0.9375rem;
   transition: background-color 0.15s ease, color 0.15s ease;
 
   &:hover {
-    @apply bg-brand-100;
+    @apply bg-brand-light;
   }
 
   &:focus-visible {

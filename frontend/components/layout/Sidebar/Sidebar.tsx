@@ -31,6 +31,7 @@ export function SideBar() {
           width={120}
           height={40}
           priority
+          className="h-100 w-auto"
         />
       </div>
 

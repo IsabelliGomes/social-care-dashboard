@@ -11,9 +11,9 @@ export default function DashboardLayout({
     <AuthGuard>
       <div className={styles.shell}>
         <SideBar />
-        <div className={styles.main}>
+        <main id="main-content" className={styles.main}>
           {children}
-        </div>
+        </main>
         <BottomBar />
       </div>
     </AuthGuard>

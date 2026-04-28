@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import styles from "./ConfirmationReviewDialog.module.scss";
 
 type ConfirmationReviewDialogProps = {
@@ -13,6 +14,8 @@ type ConfirmationReviewDialogProps = {
   isLoading?: boolean;
 };
 
+const FOCUSABLE = 'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 export function ConfirmationReviewDialog({
   isOpen,
   title = "Confirmar revisão",
@@ -23,12 +26,56 @@ export function ConfirmationReviewDialog({
   onCancel,
   isLoading = false,
 }: ConfirmationReviewDialogProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(FOCUSABLE));
+    focusable[0]?.focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onCancel();
+        return;
+      }
+      if (e.key === "Tab" && focusable.length > 0) {
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onCancel]);
+
   if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onCancel} role="presentation">
-      <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
-        <h2 className={styles.title}>{title}</h2>
+    <div className={styles.overlay} onClick={onCancel} aria-hidden="true">
+      <div
+        ref={dialogRef}
+        className={styles.dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 id="dialog-title" className={styles.title}>{title}</h2>
         <p className={styles.message}>{message}</p>
 
         <div className={styles.actions}>

@@ -2,14 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-surface: #ffffff;
+  --color-surface-light: #f9fafb;
+  --color-primary: #111827;
+  --color-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-card-shadow: rgba(0, 0, 0, 0.06);
+}
+
+.dark {
+  --color-surface: #1f2937;
+  --color-surface-light: #243041;
+  --color-primary: #f3f4f6;
+  --color-secondary: #cbd5e1;
+  --color-border: #374151;
+  --color-card-shadow: rgba(0, 0, 0, 0.35);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: "Cera Pro", system-ui, sans-serif;
-  background-color: #f9fafb;
-  color: #111827;
+  background-color: var(--color-surface-light);
+  color: var(--color-primary);
 }
 
 * {
@@ -17,6 +35,26 @@ body {
 }
 
 ::selection {
-  background: #111827;
-  color: #ffffff;
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+/* Skip-to-main link */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: -999px;
+  z-index: 9999;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  left: 0;
 }
