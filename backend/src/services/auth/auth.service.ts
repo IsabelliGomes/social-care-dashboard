@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret";
-const JWT_EXPIRES_IN = "24h";
+const JWT_EXPIRES_IN = "1h";
 
 const VALID_EMAIL = "tecnico@prefeitura.rio";
 const VALID_PASSWORD = "painel@2024";

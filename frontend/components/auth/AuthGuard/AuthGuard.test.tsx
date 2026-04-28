@@ -5,6 +5,7 @@ jest.mock("next/navigation", () => ({
   useRouter: () => ({
     replace: jest.fn(),
   }),
+  usePathname: () => "/dashboard",
 }));
 
 jest.mock("@/lib/api", () => ({

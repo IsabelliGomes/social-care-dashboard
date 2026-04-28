@@ -27,10 +27,31 @@ export const getAuthHeader = (): { Authorization: string } | {} => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+/** Only these requests may run without a valid JWT (login). */
+function allowsUnauthenticatedRequest(
+  endpoint: string,
+  options: RequestInit
+): boolean {
+  const method = (options.method ?? "GET").toUpperCase();
+  const path = endpoint.split("?")[0];
+  return method === "POST" && path === "/auth/token";
+}
+
 export const apiCall = async (
   endpoint: string,
   options: RequestInit = {}
 ): Promise<Response> => {
+  const needsAuth = !allowsUnauthenticatedRequest(endpoint, options);
+
+  if (needsAuth && typeof window !== "undefined") {
+    const token = getToken();
+    if (!token || !isTokenValid(token)) {
+      clearToken();
+      window.location.replace("/");
+      throw new Error("Não autenticado");
+    }
+  }
+
   const headers = {
     "Content-Type": "application/json",
     ...getAuthHeader(),
